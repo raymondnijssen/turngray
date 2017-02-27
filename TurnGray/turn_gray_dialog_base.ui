@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>169</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,9 @@
   <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>240</y>
-     <width>341</width>
+     <x>10</x>
+     <y>130</y>
+     <width>381</width>
      <height>32</height>
     </rect>
    </property>
@@ -32,9 +32,9 @@
   <widget class="QgsColorButtonV2" name="mColorButtonForeground">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>70</y>
-     <width>120</width>
+     <x>139</x>
+     <y>54</y>
+     <width>251</width>
      <height>28</height>
     </rect>
    </property>
@@ -56,9 +56,9 @@
   <widget class="QgsColorButtonV2" name="mColorButtonBackground">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>100</y>
-     <width>120</width>
+     <x>139</x>
+     <y>88</y>
+     <width>251</width>
      <height>28</height>
     </rect>
    </property>
@@ -70,14 +70,53 @@
     </color>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_composer">
+  <widget class="QComboBox" name="comboBox_composer">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>371</width>
+     <x>139</x>
+     <y>21</y>
+     <width>251</width>
      <height>27</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_composer">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>21</y>
+     <width>105</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Map composer:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_foreground_color">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>54</y>
+     <width>85</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Foreground:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_background_color">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>88</y>
+     <width>86</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Background:</string>
    </property>
   </widget>
  </widget>

@@ -22,6 +22,7 @@
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt4.QtGui import QAction, QIcon
+from qgis.core import QgsMessageLog
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -60,6 +61,7 @@ class TurnGray:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
+        self.do_log = True
 
 
         # Declare instance attributes
@@ -83,6 +85,11 @@ class TurnGray:
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('TurnGray', message)
+
+    def log(self, message, tab='turn gray'):
+        if self.do_log:
+            QgsMessageLog.logMessage(str(message), 'turn gray', QgsMessageLog.INFO )
+            #progress.setText('  '+str(message))
 
 
     def add_action(
@@ -170,6 +177,10 @@ class TurnGray:
             text=self.tr(u'Change color of composer items'),
             callback=self.run,
             parent=self.iface.mainWindow())
+        # add composer names to dialog
+        composers = self.iface.activeComposers()
+        for composer in composers:
+            self.dlg.comboBox_composer.addItem(composer.composerWindow().windowTitle())
 
 
     def unload(self):
@@ -194,20 +205,28 @@ class TurnGray:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
             
-                        
             composers = self.iface.activeComposers()
+            self.log(composers)
             
+            #self.log(self.dlg.comboBox_composer)
+            #self.log(self.dlg.comboBox_composer.currentText())
             
-            if len(composers) > 0:
-                cv = composers[1]
-            else:
+            cv = None
+            for composer in composers:
+                self.log(u'composer title"' + composer.composerWindow().windowTitle())
+                self.log(u'combobox item"' + self.dlg.comboBox_composer.currentText())
+                if composer.composerWindow().windowTitle() == self.dlg.comboBox_composer.currentText():
+                    self.log('hiero')
+                    
+                    cv = composer
+                    #break
+            if cv is None:
+                self.log(u'composer "' + self.dlg.comboBox_composer.currentText() + '" does not exist')
                 return
-            cv.composerWindow()
-
+                        
             title = cv.composerWindow().windowTitle()
-            print title
-
-            qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
+            self.log(title)
+            
 
             #newForegroundColor = QColor(50,50,50,255) #grey
             #newForegroundColor = QColor(50,50,200,255) #blue
@@ -218,6 +237,9 @@ class TurnGray:
             #newBackgroundColor = QColor(200,200,200,255) #grey
             #newBackgroundColor = QColor(255,255,100,100) #yellow
             newBackgroundColor = self.dlg.mColorButtonBackground.color()
+            
+            self.log(newForegroundColor.getRgb())
+            self.log(newBackgroundColor.getRgb())
 
             for ding in cv.items():
                 setQgsComposerItemColor(ding, newForegroundColor, newBackgroundColor)

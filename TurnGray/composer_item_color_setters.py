@@ -1,5 +1,6 @@
 from PyQt4.QtGui import QColor
 
+#qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
 
 def setQgsComposerLabelColor(composerLabel, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
@@ -52,7 +53,7 @@ def setQgsComposerScaleBarColor(composerScaleBar, foregroundColor=None, backgrou
             #print composerScaleBar.fillColor().getRgb()
             composerScaleBar.setFillColor(foregroundColor)
     if backgroundColor is not None:
-        #print composerScaleBar.backgroundColor().getRgb()
+        print composerScaleBar.backgroundColor().getRgb()
         composerScaleBar.setBackgroundColor(backgroundColor)
         if False:#qgisVersion >= 29900:
             #print composerScaleBar.fillColor2().getRgb()
