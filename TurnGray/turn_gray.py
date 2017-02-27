@@ -27,6 +27,9 @@ import resources
 # Import the code for the dialog
 from turn_gray_dialog import TurnGrayDialog
 import os.path
+from composer_item_color_setters import setQgsComposerItemColor
+import qgis
+from PyQt4.QtGui import QColor
 
 
 class TurnGray:
@@ -190,4 +193,35 @@ class TurnGray:
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
-            pass
+            
+                        
+            composers = self.iface.activeComposers()
+            
+            
+            if len(composers) > 0:
+                cv = composers[1]
+            else:
+                return
+            cv.composerWindow()
+
+            title = cv.composerWindow().windowTitle()
+            print title
+
+            qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
+
+            #newForegroundColor = QColor(50,50,50,255) #grey
+            #newForegroundColor = QColor(50,50,200,255) #blue
+            #newForegroundColor = QColor(200,10,10,255) #red
+            newForegroundColor = self.dlg.mColorButtonForeground.color()
+
+            #newBackgroundColor = QColor(255,255,255,255) #white
+            #newBackgroundColor = QColor(200,200,200,255) #grey
+            #newBackgroundColor = QColor(255,255,100,100) #yellow
+            newBackgroundColor = self.dlg.mColorButtonBackground.color()
+
+            for ding in cv.items():
+                setQgsComposerItemColor(ding, newForegroundColor, newBackgroundColor)
+             
+            # repaint
+            cv.composition().refreshItems()
+            

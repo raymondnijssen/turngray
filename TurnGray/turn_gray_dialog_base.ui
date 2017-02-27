@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>TurnGrayDialogBase</class>
- <widget class="QDialog" name="TurnGrayDialogBase" >
-  <property name="geometry" >
+ <widget class="QDialog" name="TurnGrayDialogBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,11 +10,11 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Turn Gray</string>
   </property>
-  <widget class="QDialogButtonBox" name="button_box" >
-   <property name="geometry" >
+  <widget class="QDialogButtonBox" name="button_box">
+   <property name="geometry">
     <rect>
      <x>30</x>
      <y>240</y>
@@ -21,14 +22,72 @@
      <height>32</height>
     </rect>
    </property>
-   <property name="orientation" >
+   <property name="orientation">
     <enum>Qt::Horizontal</enum>
    </property>
-   <property name="standardButtons" >
+   <property name="standardButtons">
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
+  <widget class="QgsColorButtonV2" name="mColorButtonForeground">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>70</y>
+     <width>120</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="color">
+    <color>
+     <red>127</red>
+     <green>127</green>
+     <blue>127</blue>
+    </color>
+   </property>
+   <property name="defaultColor">
+    <color>
+     <red>127</red>
+     <green>127</green>
+     <blue>127</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="QgsColorButtonV2" name="mColorButtonBackground">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>100</y>
+     <width>120</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="color">
+    <color>
+     <red>255</red>
+     <green>255</green>
+     <blue>255</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="spinBox_composer">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>371</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsColorButtonV2</class>
+   <extends>QToolButton</extends>
+   <header>qgscolorbuttonv2.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -37,13 +96,13 @@
    <receiver>TurnGrayDialogBase</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="source_label" >
-     <x>248</x>
-     <y>254</y>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
     </hint>
-    <hint type="destination_label" >
-     <x>157</x>
-     <y>274</y>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -53,13 +112,13 @@
    <receiver>TurnGrayDialogBase</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="source_label" >
-     <x>316</x>
-     <y>260</y>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
     </hint>
-    <hint type="destination_label" >
-     <x>286</x>
-     <y>274</y>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
