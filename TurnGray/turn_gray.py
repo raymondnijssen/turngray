@@ -177,10 +177,6 @@ class TurnGray:
             text=self.tr(u'Change color of composer items'),
             callback=self.run,
             parent=self.iface.mainWindow())
-        # add composer names to dialog
-        composers = self.iface.activeComposers()
-        for composer in composers:
-            self.dlg.comboBox_composer.addItem(composer.composerWindow().windowTitle())
 
 
     def unload(self):
@@ -196,6 +192,11 @@ class TurnGray:
 
     def run(self):
         """Run method that performs all the real work"""
+        # add composer names to dialog
+        composers = self.iface.activeComposers()
+        self.dlg.comboBox_composer.clear()
+        for composer in composers:
+            self.dlg.comboBox_composer.addItem(composer.composerWindow().windowTitle())
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
