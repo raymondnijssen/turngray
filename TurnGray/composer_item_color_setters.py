@@ -2,6 +2,13 @@ from PyQt4.QtGui import QColor
 
 #qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
 
+# fixes not updated composer widget
+# https://lists.osgeo.org/pipermail/qgis-developer/2017-February/047241.html
+def sillyWidgetFix(item):
+    old_id = item.id()
+    item.setId('a')
+    item.setId(old_id)
+
 def setQgsComposerLabelColor(composerLabel, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
         #print composerLabel.fontColor().getRgb()
@@ -94,16 +101,22 @@ def setQgsComposerItemColor(composerItem, foregroundColor=None, backgroundColor=
     print classname
     if classname == u'QgsComposerLabel':
         setQgsComposerLabelColor(composerItem, foregroundColor, backgroundColor)
+        sillyWidgetFix(composerItem)
     if classname == u'QgsComposerLegend':
         setQgsComposerLegendColor(composerItem, foregroundColor, backgroundColor)
+        sillyWidgetFix(composerItem)
     if classname == u'QgsComposerMap':
         setQgsComposerMapColor(composerItem, foregroundColor, backgroundColor)
+        #sillyWidgetFix(composerItem)
     if classname == u'QgsComposerPicture':
         setQgsComposerPictureColor(composerItem, foregroundColor, backgroundColor)
+        sillyWidgetFix(composerItem)
     if classname == u'QgsComposerScaleBar':
         setQgsComposerScaleBarColor(composerItem, foregroundColor, backgroundColor)
+        sillyWidgetFix(composerItem)
     if classname == u'QgsComposerShape':
         setQgsComposerShapeColor(composerItem, foregroundColor, backgroundColor)
+        sillyWidgetFix(composerItem)
 
 
 
