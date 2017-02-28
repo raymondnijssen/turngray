@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- replace qgscolorbuttonv2.h by qgis.gui -->
 <ui version="4.0">
  <class>TurnGrayDialogBase</class>
  <widget class="QDialog" name="TurnGrayDialogBase">
@@ -124,7 +125,7 @@
   <customwidget>
    <class>QgsColorButtonV2</class>
    <extends>QToolButton</extends>
-   <header>qgscolorbuttonv2.h</header>
+   <header>qgis.gui</header>
   </customwidget>
  </customwidgets>
  <resources/>
