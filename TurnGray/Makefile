@@ -44,7 +44,8 @@ PLUGINNAME = TurnGray
 
 PY_FILES = \
 	__init__.py \
-	turn_gray.py turn_gray_dialog.py
+	turn_gray.py turn_gray_dialog.py \
+	composer_item_color_setters.py
 
 UI_FILES = turn_gray_dialog_base.ui
 

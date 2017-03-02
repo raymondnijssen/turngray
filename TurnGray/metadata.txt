@@ -10,7 +10,7 @@
 name=Turn Gray
 qgisMinimumVersion=2.0
 description=Turn black items in composer into gray (or any other color).
-version=0.1
+version=0.2.0
 author=Raymond Nijssen, Terglobo
 email=r.nijssen@terglobo.nl
 
