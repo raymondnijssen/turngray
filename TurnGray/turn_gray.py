@@ -61,7 +61,7 @@ class TurnGray:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
-        self.do_log = True
+        self.do_log = False # set to True for debugging
 
 
         # Declare instance attributes
@@ -188,6 +188,11 @@ class TurnGray:
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
         del self.toolbar
+    
+    def updateOkButton():
+        # TODO: only enable OK button composer is selected
+        if not self.dlg.comboBox_composer.currentText() == '':
+            pass
 
 
     def run(self):
@@ -195,6 +200,7 @@ class TurnGray:
         # add composer names to dialog
         composers = self.iface.activeComposers()
         self.dlg.comboBox_composer.clear()
+        self.dlg.comboBox_composer.addItem('')
         for composer in composers:
             self.dlg.comboBox_composer.addItem(composer.composerWindow().windowTitle())
         # show the dialog
@@ -212,15 +218,17 @@ class TurnGray:
             #self.log(self.dlg.comboBox_composer)
             #self.log(self.dlg.comboBox_composer.currentText())
             
+            if self.dlg.comboBox_composer.currentText() == '':
+                self.log(u'no composer selected')
+                return
+            
             cv = None
             for composer in composers:
                 self.log(u'composer title"' + composer.composerWindow().windowTitle())
                 self.log(u'combobox item"' + self.dlg.comboBox_composer.currentText())
                 if composer.composerWindow().windowTitle() == self.dlg.comboBox_composer.currentText():
-                    self.log('hiero')
-                    
                     cv = composer
-                    #break
+                    break
             if cv is None:
                 self.log(u'composer "' + self.dlg.comboBox_composer.currentText() + '" does not exist')
                 return
@@ -228,22 +236,14 @@ class TurnGray:
             title = cv.composerWindow().windowTitle()
             self.log(title)
             
-
-            #newForegroundColor = QColor(50,50,50,255) #grey
-            #newForegroundColor = QColor(50,50,200,255) #blue
-            #newForegroundColor = QColor(200,10,10,255) #red
             newForegroundColor = self.dlg.mColorButtonForeground.color()
-
-            #newBackgroundColor = QColor(255,255,255,255) #white
-            #newBackgroundColor = QColor(200,200,200,255) #grey
-            #newBackgroundColor = QColor(255,255,100,100) #yellow
             newBackgroundColor = self.dlg.mColorButtonBackground.color()
             
             self.log(newForegroundColor.getRgb())
             self.log(newBackgroundColor.getRgb())
 
-            for ding in cv.items():
-                setQgsComposerItemColor(ding, newForegroundColor, newBackgroundColor)
+            for composerItem in cv.items():
+                setQgsComposerItemColor(composerItem, newForegroundColor, newBackgroundColor)
              
             # repaint
             cv.composition().refreshItems()

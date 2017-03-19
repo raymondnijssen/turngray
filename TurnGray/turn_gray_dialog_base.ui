@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- replace qgscolorbuttonv2.h by qgis.gui -->
 <ui version="4.0">
  <class>TurnGrayDialogBase</class>
  <widget class="QDialog" name="TurnGrayDialogBase">
@@ -128,6 +127,12 @@
    <header>qgis.gui</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>button_box</tabstop>
+  <tabstop>comboBox_composer</tabstop>
+  <tabstop>mColorButtonForeground</tabstop>
+  <tabstop>mColorButtonBackground</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

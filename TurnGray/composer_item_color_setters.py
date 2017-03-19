@@ -11,59 +11,59 @@ def sillyWidgetFix(item):
 
 def setQgsComposerLabelColor(composerLabel, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print composerLabel.fontColor().getRgb()
+        #print(composerLabel.fontColor().getRgb())
         composerLabel.setFontColor(foregroundColor)
-        #print composerLabel.frameOutlineColor().getRgb()
+        #print(composerLabel.frameOutlineColor().getRgb())
         composerLabel.setFrameOutlineColor(foregroundColor)
     if backgroundColor is not None:
-        #print composerLabel.backgroundColor().getRgb()
+        #print(composerLabel.backgroundColor().getRgb())
         composerLabel.setBackgroundColor(backgroundColor)
 
 
 def setQgsComposerLegendColor(composerLegend, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print composerLegend.fontColor().getRgb()
+        #print(composerLegend.fontColor().getRgb())
         composerLegend.setFontColor(foregroundColor)
-        #print composerLegend.frameOutlineColor().getRgb()
+        #print(composerLegend.frameOutlineColor().getRgb())
         composerLegend.setFrameOutlineColor(foregroundColor)
     if backgroundColor is not None:
-        #print composerLegend.backgroundColor().getRgb()
+        #print(composerLegend.backgroundColor().getRgb())
         composerLegend.setBackgroundColor(backgroundColor)
 
 
 def setQgsComposerMapColor(composerMap, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print composerMap.frameOutlineColor().getRgb()
+        #print(composerMap.frameOutlineColor().getRgb())
         composerMap.setFrameOutlineColor(foregroundColor)
     if backgroundColor is not None:
-        #print composerMap.backgroundColor().getRgb()
+        #print(composerMap.backgroundColor().getRgb())
         composerMap.setBackgroundColor(backgroundColor)
 
 
 def setQgsComposerPictureColor(composerMap, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print composerMap.frameOutlineColor().getRgb()
+        #print(composerMap.frameOutlineColor().getRgb())
         composerMap.setFrameOutlineColor(foregroundColor)
     if backgroundColor is not None:
-        #print composerMap.backgroundColor().getRgb()
+        #print(composerMap.backgroundColor().getRgb())
         composerMap.setBackgroundColor(backgroundColor)
 
 
 def setQgsComposerScaleBarColor(composerScaleBar, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print composerScaleBar.fontColor().getRgb()
+        #print(composerScaleBar.fontColor().getRgb())
         composerScaleBar.setFontColor(foregroundColor)
-        #print composerScaleBar.frameOutlineColor().getRgb()
+        #print(composerScaleBar.frameOutlineColor().getRgb())
         composerScaleBar.setFrameOutlineColor(foregroundColor)
         # this will only work from QGIS 3
         if False:#qgisVersion >= 29900:
-            #print composerScaleBar.fillColor().getRgb()
+            #print(composerScaleBar.fillColor().getRgb())
             composerScaleBar.setFillColor(foregroundColor)
     if backgroundColor is not None:
-        print composerScaleBar.backgroundColor().getRgb()
+        print(composerScaleBar.backgroundColor().getRgb())
         composerScaleBar.setBackgroundColor(backgroundColor)
         if False:#qgisVersion >= 29900:
-            #print composerScaleBar.fillColor2().getRgb()
+            #print(composerScaleBar.fillColor2().getRgb())
             composerScaleBar.setFillColor2(backgroundColor)
 
 
@@ -73,10 +73,10 @@ def setQgsComposerShapeColor(composerShape, foregroundColor=None, backgroundColo
     if not type(symbol).__name__ == u'QgsSimpleFillSymbolLayerV2':
         return
     if foregroundColor is not None:
-        #print symbol.borderColor().getRgb()
+        #print(symbol.borderColor().getRgb())
         symbol.setBorderColor(foregroundColor)
     if backgroundColor is not None:
-        #print symbol.fillColor().getRgb()
+        #print(symbol.fillColor().getRgb())
         symbol.setFillColor(backgroundColor)
 
 '''
@@ -84,7 +84,7 @@ classes:
     QgsComposerArrow
     QgsComposerAttributeTable
     QgsComposerFrame
-    # QgsComposerLabel
+    #  QgsComposerLabel
     # QgsComposerLegend
     # QgsComposerMap
     QgsComposerMapGrid
@@ -98,7 +98,7 @@ def setQgsComposerItemColor(composerItem, foregroundColor=None, backgroundColor=
     if foregroundColor is None and backgroundColor is None:
         return
     classname = type(composerItem).__name__
-    print classname
+    #print(classname)
     if classname == u'QgsComposerLabel':
         setQgsComposerLabelColor(composerItem, foregroundColor, backgroundColor)
         sillyWidgetFix(composerItem)
