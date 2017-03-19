@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QIcon
+from PyQt4.QtGui import QAction, QDialogButtonBox, QIcon
 from qgis.core import QgsMessageLog
 # Initialize Qt resources from file resources.py
 import resources
@@ -30,7 +30,6 @@ from turn_gray_dialog import TurnGrayDialog
 import os.path
 from composer_item_color_setters import setQgsComposerItemColor
 import qgis
-from PyQt4.QtGui import QColor
 
 
 class TurnGray:
@@ -61,7 +60,7 @@ class TurnGray:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
-        self.do_log = False # set to True for debugging
+        self.do_log = True # set to True for debugging
 
 
         # Declare instance attributes
@@ -177,7 +176,8 @@ class TurnGray:
             text=self.tr(u'Change color of composer items'),
             callback=self.run,
             parent=self.iface.mainWindow())
-
+        # connections:
+        self.dlg.comboBox_composer.currentIndexChanged.connect(self.composerChanged)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -189,11 +189,18 @@ class TurnGray:
         # remove the toolbar
         del self.toolbar
     
-    def updateOkButton():
-        # TODO: only enable OK button composer is selected
-        if not self.dlg.comboBox_composer.currentText() == '':
-            pass
-
+    def composerChanged(self, comboBox_index):
+        if comboBox_index <= 0:
+            self.log('no composer selected')
+            self.setOkButton(False)
+        else:
+            self.log(self.dlg.comboBox_composer.currentText())
+            self.setOkButton(True)
+        
+    
+    def setOkButton(self, do_enable):
+        self.dlg.button_box.button(QDialogButtonBox.Ok).setEnabled(do_enable)
+        
 
     def run(self):
         """Run method that performs all the real work"""

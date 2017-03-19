@@ -60,7 +60,7 @@ def setQgsComposerScaleBarColor(composerScaleBar, foregroundColor=None, backgrou
             #print(composerScaleBar.fillColor().getRgb())
             composerScaleBar.setFillColor(foregroundColor)
     if backgroundColor is not None:
-        print(composerScaleBar.backgroundColor().getRgb())
+        #print(composerScaleBar.backgroundColor().getRgb())
         composerScaleBar.setBackgroundColor(backgroundColor)
         if False:#qgisVersion >= 29900:
             #print(composerScaleBar.fillColor2().getRgb())
@@ -84,7 +84,7 @@ classes:
     QgsComposerArrow
     QgsComposerAttributeTable
     QgsComposerFrame
-    #  QgsComposerLabel
+    # QgsComposerLabel
     # QgsComposerLegend
     # QgsComposerMap
     QgsComposerMapGrid
