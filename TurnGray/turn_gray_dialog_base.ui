@@ -6,119 +6,81 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>169</height>
+    <width>340</width>
+    <height>154</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Turn Gray</string>
   </property>
-  <widget class="QDialogButtonBox" name="button_box">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>130</y>
-     <width>381</width>
-     <height>32</height>
-    </rect>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
    </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QgsColorButtonV2" name="mColorButtonForeground">
-   <property name="geometry">
-    <rect>
-     <x>139</x>
-     <y>54</y>
-     <width>251</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="color">
-    <color>
-     <red>127</red>
-     <green>127</green>
-     <blue>127</blue>
-    </color>
-   </property>
-   <property name="defaultColor">
-    <color>
-     <red>127</red>
-     <green>127</green>
-     <blue>127</blue>
-    </color>
-   </property>
-  </widget>
-  <widget class="QgsColorButtonV2" name="mColorButtonBackground">
-   <property name="geometry">
-    <rect>
-     <x>139</x>
-     <y>88</y>
-     <width>251</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="color">
-    <color>
-     <red>255</red>
-     <green>255</green>
-     <blue>255</blue>
-    </color>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_composer">
-   <property name="geometry">
-    <rect>
-     <x>139</x>
-     <y>21</y>
-     <width>251</width>
-     <height>27</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_composer">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>21</y>
-     <width>105</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Map composer:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_foreground_color">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>54</y>
-     <width>85</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Foreground:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_background_color">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>88</y>
-     <width>86</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Background:</string>
-   </property>
-  </widget>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_composer">
+     <property name="text">
+      <string>Map composer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="comboBox_composer"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_foreground_color">
+     <property name="text">
+      <string>Foreground:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QgsColorButtonV2" name="mColorButtonForeground">
+     <property name="color">
+      <color>
+       <red>127</red>
+       <green>127</green>
+       <blue>127</blue>
+      </color>
+     </property>
+     <property name="defaultColor">
+      <color>
+       <red>127</red>
+       <green>127</green>
+       <blue>127</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_background_color">
+     <property name="text">
+      <string>Background:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QgsColorButtonV2" name="mColorButtonBackground">
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>255</green>
+       <blue>255</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="button_box">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <customwidgets>
   <customwidget>
@@ -127,12 +89,6 @@
    <header>qgis.gui</header>
   </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>button_box</tabstop>
-  <tabstop>comboBox_composer</tabstop>
-  <tabstop>mColorButtonForeground</tabstop>
-  <tabstop>mColorButtonBackground</tabstop>
- </tabstops>
  <resources/>
  <connections>
   <connection>
