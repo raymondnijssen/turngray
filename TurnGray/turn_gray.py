@@ -60,7 +60,7 @@ class TurnGray:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
-        self.do_log = True # set to True for debugging
+        self.do_log = False # set to True for debugging
 
 
         # Declare instance attributes
