@@ -167,6 +167,7 @@ class TurnGray:
 
         return action
 
+
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
@@ -177,7 +178,11 @@ class TurnGray:
             callback=self.run,
             parent=self.iface.mainWindow())
         # connections:
-        self.dlg.comboBox_composer.currentIndexChanged.connect(self.composerChanged)
+        self.dlg.comboBox_composer.currentIndexChanged.connect(self.updateInterface)
+        self.dlg.checkBox_foreground.toggled.connect(self.updateInterface)
+        self.dlg.checkBox_background.toggled.connect(self.updateInterface)
+        self.updateInterface()
+
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -189,18 +194,15 @@ class TurnGray:
         # remove the toolbar
         del self.toolbar
     
-    def composerChanged(self, comboBox_index):
-        if comboBox_index <= 0:
-            self.log('no composer selected')
-            self.setOkButton(False)
+
+    def updateInterface(self):
+        self.dlg.mColorButtonForeground.setEnabled(self.dlg.checkBox_foreground.isChecked())
+        self.dlg.mColorButtonBackground.setEnabled(self.dlg.checkBox_background.isChecked())
+        if self.dlg.comboBox_composer.currentIndex() > 0 and (self.dlg.checkBox_foreground.isChecked() or self.dlg.checkBox_background.isChecked()):
+            self.dlg.button_box.button(QDialogButtonBox.Ok).setEnabled(True)
         else:
-            self.log(self.dlg.comboBox_composer.currentText())
-            self.setOkButton(True)
-        
-    
-    def setOkButton(self, do_enable):
-        self.dlg.button_box.button(QDialogButtonBox.Ok).setEnabled(do_enable)
-        
+            self.dlg.button_box.button(QDialogButtonBox.Ok).setEnabled(False)
+
 
     def run(self):
         """Run method that performs all the real work"""
@@ -243,11 +245,16 @@ class TurnGray:
             title = cv.composerWindow().windowTitle()
             self.log(title)
             
-            newForegroundColor = self.dlg.mColorButtonForeground.color()
-            newBackgroundColor = self.dlg.mColorButtonBackground.color()
-            
-            self.log(newForegroundColor.getRgb())
-            self.log(newBackgroundColor.getRgb())
+            if self.dlg.checkBox_foreground.isChecked():
+                newForegroundColor = self.dlg.mColorButtonForeground.color()
+                self.log(newForegroundColor.getRgb())
+            else:
+                newForegroundColor = None
+            if self.dlg.checkBox_background.isChecked():
+                newBackgroundColor = self.dlg.mColorButtonBackground.color()
+                self.log(newBackgroundColor.getRgb())
+            else:
+                newBackgroundColor = None
 
             for composerItem in cv.items():
                 setQgsComposerItemColor(composerItem, newForegroundColor, newBackgroundColor)
