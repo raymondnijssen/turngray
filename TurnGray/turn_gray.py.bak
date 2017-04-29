@@ -20,28 +20,19 @@
  *                                                                         *
  ***************************************************************************/
 """
-from __future__ import absolute_import
-from builtins import str
-from builtins import object
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from qgis.PyQt.QtWidgets import QAction, QDialogButtonBox
-from qgis.PyQt.QtGui import QIcon
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from PyQt4.QtGui import QAction, QDialogButtonBox, QIcon
 from qgis.core import QgsMessageLog
 # Initialize Qt resources from file resources.py
-try:
-    from . import resources_rc4
-    print('imported resources_rc4')
-except:
-    from . import resources_rc5
-    print('imported resources_rc5')
+import resources
 # Import the code for the dialog
-from .turn_gray_dialog import TurnGrayDialog
+from turn_gray_dialog import TurnGrayDialog
 import os.path
-from .composer_item_color_setters import setQgsComposerItemColor
+from composer_item_color_setters import setQgsComposerItemColor
 import qgis
 
 
-class TurnGray(object):
+class TurnGray:
     """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
@@ -265,7 +256,7 @@ class TurnGray(object):
             else:
                 newBackgroundColor = None
 
-            for composerItem in list(cv.items()):
+            for composerItem in cv.items():
                 setQgsComposerItemColor(composerItem, newForegroundColor, newBackgroundColor)
              
             # repaint

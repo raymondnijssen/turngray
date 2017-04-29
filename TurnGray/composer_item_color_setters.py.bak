@@ -1,4 +1,4 @@
-from qgis.PyQt.QtGui import QColor
+from PyQt4.QtGui import QColor
 
 #qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
 

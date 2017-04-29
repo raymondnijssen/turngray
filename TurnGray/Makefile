@@ -53,9 +53,11 @@ EXTRAS = metadata.txt icon.png
 
 EXTRA_DIRS =
 
-COMPILED_RESOURCE_FILES = resources.py
+#COMPILED_RESOURCE_FILES = resources.py
+COMPILED_RESOURCE_FILES = resources_rc4.py \
+    resources_rc5.py
 
-PEP8EXCLUDE=pydev,resources.py,conf.py,third_party,ui
+PEP8EXCLUDE=pydev, resources_rc4.py, resources_rc5.py, conf.py, third_party,ui
 
 
 #################################################
@@ -74,8 +76,13 @@ default: compile
 
 compile: $(COMPILED_RESOURCE_FILES)
 
-%.py : %.qrc $(RESOURCES_SRC)
-	pyrcc4 -o $*.py  $<
+%_rc4.py : %.qrc $(RESOURCES_SRC)
+	pyrcc4 -o $*_rc4.py  $<
+	pyrcc5 -o $*_rc5.py  $<
+
+ui/%_ui4.py ui/%_ui5.py : ui/%.ui $(UI_FILES)
+	pyuic4 -o ui/$*_ui4.py  $<
+	pyuic5 -o ui/$*_ui5.py  $<
 
 %.qm : %.ts
 	$(LRELEASE) $<
@@ -101,7 +108,7 @@ test: compile transcompile
 deploy: compile doc transcompile
 	@echo
 	@echo "------------------------------------------"
-	@echo "Deploying plugin to your .qgis2 directory."
+	@echo "Deploying plugin to your .qgis3 directory."
 	@echo "------------------------------------------"
 	# The deploy  target only works on unix like operating system where
 	# the Python plugin directory is located at:
