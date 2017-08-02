@@ -92,4 +92,7 @@ ENV/
 .idea/
 
 *.qgs~
+*.py~
+.gitignore~
+
 

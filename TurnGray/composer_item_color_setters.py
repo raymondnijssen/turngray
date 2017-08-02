@@ -54,7 +54,10 @@ def setQgsComposerScaleBarColor(composerScaleBar, foregroundColor=None, backgrou
         #print(composerScaleBar.fontColor().getRgb())
         composerScaleBar.setFontColor(foregroundColor)
         #print(composerScaleBar.frameOutlineColor().getRgb())
-        composerScaleBar.setFrameOutlineColor(foregroundColor)
+        composerScaleBar.setFrameOutlineColor(foregroundColor)        
+        composerScaleBar.setBrush(foregroundColor)
+        composerScaleBar.setPen(foregroundColor)
+        
         # this will only work from QGIS 3
         if False:#qgisVersion >= 29900:
             #print(composerScaleBar.fillColor().getRgb())
@@ -62,6 +65,7 @@ def setQgsComposerScaleBarColor(composerScaleBar, foregroundColor=None, backgrou
     if backgroundColor is not None:
         #print(composerScaleBar.backgroundColor().getRgb())
         composerScaleBar.setBackgroundColor(backgroundColor)
+        composerScaleBar.setBrush2(backgroundColor)
         if False:#qgisVersion >= 29900:
             #print(composerScaleBar.fillColor2().getRgb())
             composerScaleBar.setFillColor2(backgroundColor)
