@@ -181,6 +181,8 @@ class TurnGray:
         self.dlg.comboBox_composer.currentIndexChanged.connect(self.updateInterface)
         self.dlg.checkBox_foreground.toggled.connect(self.updateInterface)
         self.dlg.checkBox_background.toggled.connect(self.updateInterface)
+        self.dlg.mColorButtonForeground.setAllowAlpha(True)
+        self.dlg.mColorButtonBackground.setAllowAlpha(True)
         self.updateInterface()
 
 
