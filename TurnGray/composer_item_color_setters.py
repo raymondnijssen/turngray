@@ -38,7 +38,6 @@ def setQgsComposerMapColor(composerMap, foregroundColor=None, backgroundColor=No
         #print(composerMap.frameOutlineColor().getRgb())
         composerMap.setFrameOutlineColor(foregroundColor)
         for grid in composerMap.grids().asList():
-            print(grid)
             grid.setAnnotationFontColor(foregroundColor)
             grid.setFramePenColor(foregroundColor)
             grid.setFrameFillColor2(foregroundColor)
@@ -108,14 +107,14 @@ def setQgsComposerAttributeTableColor(composerFrame, foregroundColor=None, backg
 
 
 '''
-classes:
+todo:
     QgsComposerArrow
     # QgsComposerAttributeTable
     QgsComposerFrame
     # QgsComposerLabel
     # QgsComposerLegend
     # QgsComposerMap
-    QgsComposerMapGrid
+    # QgsComposerMapGrid
     # QgsComposerPicture
     # QgsComposerScaleBar
     # QgsComposerShape
@@ -126,7 +125,7 @@ def setQgsComposerItemColor(composerItem, foregroundColor=None, backgroundColor=
     if foregroundColor is None and backgroundColor is None:
         return
     classname = type(composerItem).__name__
-    print(classname)
+    ##print(classname)
     if isinstance(composerItem, QgsComposerLabel):
         setQgsComposerLabelColor(composerItem, foregroundColor, backgroundColor)
         sillyWidgetFix(composerItem)
