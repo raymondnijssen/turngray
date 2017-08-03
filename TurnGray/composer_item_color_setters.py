@@ -1,5 +1,6 @@
 from PyQt4.QtGui import QColor
-from qgis.core import QgsComposerLabel, QgsComposerLegend, QgsComposerMap, QgsComposerPicture, QgsComposerScaleBar, QgsComposerShape, QgsComposerTableV2, QgsComposerFrame
+from qgis.core import QgsComposerLabel, QgsComposerLegend, QgsComposerMap, QgsComposerPicture, QgsComposerScaleBar, \
+    QgsComposerShape, QgsComposerTableV2, QgsComposerFrame, QgsSimpleFillSymbolLayerV2
 
 #qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
 
