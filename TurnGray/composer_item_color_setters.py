@@ -37,9 +37,17 @@ def setQgsComposerMapColor(composerMap, foregroundColor=None, backgroundColor=No
     if foregroundColor is not None:
         #print(composerMap.frameOutlineColor().getRgb())
         composerMap.setFrameOutlineColor(foregroundColor)
+        for grid in composerMap.grids().asList():
+            print(grid)
+            grid.setAnnotationFontColor(foregroundColor)
+            grid.setFramePenColor(foregroundColor)
+            grid.setFrameFillColor2(foregroundColor)
+            grid.setGridLineColor(foregroundColor)
     if backgroundColor is not None:
-        #print(composerMap.backgroundColor().getRgb())
         composerMap.setBackgroundColor(backgroundColor)
+        for grid in composerMap.grids().asList():
+            grid.setFrameFillColor1(backgroundColor)
+            
 
 
 def setQgsComposerPictureColor(composerMap, foregroundColor=None, backgroundColor=None):
