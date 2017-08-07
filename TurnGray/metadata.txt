@@ -9,14 +9,14 @@
 [general]
 name=Turn Gray
 qgisMinimumVersion=2.0
-description=Turn black items in composer into gray (or any other color).
-version=0.3.1
+description=Turn black map composer items into gray (or any other color).
+version=0.4
 author=Raymond Nijssen, Terglobo
 email=r.nijssen@terglobo.nl
 
 about=This plugin provides an easy way to change the color of all standard items in the map composer at once. My wish was to change the black color of many items like labels, scale bars and frames into a dark gray color. But of course you can set those to any color you wish.
 
-# Feel free to let me know if you like or dislike this tool, and why. And if you have suggestions and they make sense to me, I might even implement them. Or implement them yourself if you can, the code is on github.
+# Feel free to let me know if you like or dislike this tool, and why. And if you have suggestions and they make sense to me, I might even implement them. Or implement them yourself if you can and do a pull request, the code is on github.
 
 tracker=https://github.com/raymondnijssen/turngray/issues
 repository=https://github.com/raymondnijssen/turngray
@@ -26,6 +26,7 @@ repository=https://github.com/raymondnijssen/turngray
 
 # Uncomment the following line and add your changelog:
 changelog:
+    0.4.0   (08-2017) added new types: attribute tables, map grids, scale bar (fill) and pictures
     0.3.1   (03-2017) checkboxes for changing foreground and background colors
     0.3.0   (03-2017) forcing to choose composer, scalable layout in dialog
     0.2.0   (02-2017) fix for initial version (identical to 0.1.1)
