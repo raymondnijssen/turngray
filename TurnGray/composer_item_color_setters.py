@@ -1,6 +1,6 @@
-from PyQt4.QtGui import QColor
-from qgis.core import QgsComposerLabel, QgsComposerLegend, QgsComposerMap, QgsComposerPicture, QgsComposerScaleBar, \
-    QgsComposerShape, QgsComposerTableV2, QgsComposerFrame, QgsSimpleFillSymbolLayerV2
+from PyQt5.QtGui import QColor
+from qgis.core import QgsLayoutItemLabel, QgsLayoutItemLegend, QgsLayoutItemMap, QgsLayoutItemPicture, QgsLayoutItemScaleBar, \
+    QgsLayoutItemShape, QgsSimpleFillSymbolLayer#, QgsLayoutItemTable, QgsLayoutItemFrame
 
 #qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
 
@@ -11,146 +11,113 @@ def sillyWidgetFix(item):
     item.setId('a')
     item.setId(old_id)
 
-def setQgsComposerLabelColor(composerLabel, foregroundColor=None, backgroundColor=None):
+def setLabelColor(item, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print(composerLabel.fontColor().getRgb())
-        composerLabel.setFontColor(foregroundColor)
-        #print(composerLabel.frameOutlineColor().getRgb())
-        composerLabel.setFrameOutlineColor(foregroundColor)
+        item.setFontColor(foregroundColor)
+        item.setFrameStrokeColor(foregroundColor)
     if backgroundColor is not None:
-        #print(composerLabel.backgroundColor().getRgb())
-        composerLabel.setBackgroundColor(backgroundColor)
+        item.setBackgroundColor(backgroundColor)
 
 
-def setQgsComposerLegendColor(composerLegend, foregroundColor=None, backgroundColor=None):
+def setLegendColor(item, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print(composerLegend.fontColor().getRgb())
-        composerLegend.setFontColor(foregroundColor)
-        #print(composerLegend.frameOutlineColor().getRgb())
-        composerLegend.setFrameOutlineColor(foregroundColor)
+        item.setFontColor(foregroundColor)
+        item.setFrameStrokeColor(foregroundColor)
     if backgroundColor is not None:
-        #print(composerLegend.backgroundColor().getRgb())
-        composerLegend.setBackgroundColor(backgroundColor)
+        item.setBackgroundColor(backgroundColor)
 
 
-def setQgsComposerMapColor(composerMap, foregroundColor=None, backgroundColor=None):
+def setMapColor(item, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print(composerMap.frameOutlineColor().getRgb())
-        composerMap.setFrameOutlineColor(foregroundColor)
-        for grid in composerMap.grids().asList():
+        item.setFrameStrokeColor(foregroundColor)
+        for grid in item.grids().asList():
             grid.setAnnotationFontColor(foregroundColor)
             grid.setFramePenColor(foregroundColor)
             grid.setFrameFillColor2(foregroundColor)
             grid.setGridLineColor(foregroundColor)
     if backgroundColor is not None:
-        composerMap.setBackgroundColor(backgroundColor)
-        for grid in composerMap.grids().asList():
+        item.setBackgroundColor(backgroundColor)
+        for grid in item.grids().asList():
             grid.setFrameFillColor1(backgroundColor)
-            
 
 
-def setQgsComposerPictureColor(composerMap, foregroundColor=None, backgroundColor=None):
+def setPictureColor(item, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print(composerMap.frameOutlineColor().getRgb())
-        composerMap.setFrameOutlineColor(foregroundColor)
+        item.setFrameStrokeColor(foregroundColor)
+        item.setSvgStrokeColor(foregroundColor)
     if backgroundColor is not None:
-        #print(composerMap.backgroundColor().getRgb())
-        composerMap.setBackgroundColor(backgroundColor)
+        item.setBackgroundColor(backgroundColor)
+        item.setSvgFillColor(backgroundColor)
 
 
-def setQgsComposerScaleBarColor(composerScaleBar, foregroundColor=None, backgroundColor=None):
+def setScaleBarColor(item, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
-        #print(composerScaleBar.fontColor().getRgb())
-        composerScaleBar.setFontColor(foregroundColor)
-        #print(composerScaleBar.frameOutlineColor().getRgb())
-        composerScaleBar.setFrameOutlineColor(foregroundColor)        
-        composerScaleBar.setBrush(foregroundColor)
-        composerScaleBar.setPen(foregroundColor)
-        
-        # this will only work from QGIS 3. work in progress
-        if False:#qgisVersion >= 29900:
-            #print(composerScaleBar.fillColor().getRgb())
-            composerScaleBar.setFillColor(foregroundColor)
+        item.setFontColor(foregroundColor)
+        item.setLineColor(foregroundColor)
+        item.setFillColor(foregroundColor)
+        item.setFrameStrokeColor(foregroundColor)
     if backgroundColor is not None:
-        #print(composerScaleBar.backgroundColor().getRgb())
-        composerScaleBar.setBackgroundColor(backgroundColor)
-        composerScaleBar.setBrush2(backgroundColor)
-        if False:#qgisVersion >= 29900:
-            #print(composerScaleBar.fillColor2().getRgb())
-            composerScaleBar.setFillColor2(backgroundColor)
+        item.setBackgroundColor(backgroundColor)
+        item.setFillColor2(backgroundColor)
 
 
-def setQgsComposerShapeColor(composerShape, foregroundColor=None, backgroundColor=None):
+def setShapeColor(item, foregroundColor=None, backgroundColor=None):
     # TODO: check if exists!
     try:
-        symbol = composerShape.shapeStyleSymbol().symbolLayers()[0]
+        symbol = item.symbol().symbolLayers()[0]
     except:
         return
-    if not isinstance(symbol, QgsSimpleFillSymbolLayerV2):
+    if not isinstance(symbol, QgsSimpleFillSymbolLayer):
         return
     if foregroundColor is not None:
-        symbol.setBorderColor(foregroundColor)
+        symbol.setStrokeColor(foregroundColor)
     if backgroundColor is not None:
         symbol.setFillColor(backgroundColor)
 
-
-def setQgsComposerAttributeTableColor(composerFrame, foregroundColor=None, backgroundColor=None):
-    if not isinstance(composerFrame.multiFrame(), QgsComposerTableV2):
+# todo: fix for qgis 3
+def setTableColor(item, foregroundColor=None, backgroundColor=None):
+    if not isinstance(item.multiFrame(), QgsComposerTableV2):
         return
     if foregroundColor is not None:
-        composerFrame.multiFrame().setGridColor(foregroundColor)
-        composerFrame.multiFrame().setHeaderFontColor(foregroundColor)
-        composerFrame.multiFrame().setContentFontColor(foregroundColor)
+        item.multiFrame().setGridColor(foregroundColor)
+        item.multiFrame().setHeaderFontColor(foregroundColor)
+        item.multiFrame().setContentFontColor(foregroundColor)
     if backgroundColor is not None:
-        composerFrame.multiFrame().setBackgroundColor(backgroundColor)
+        item.multiFrame().setBackgroundColor(backgroundColor)
 
 
 
 '''
 todo:
-    QgsComposerArrow
-    # QgsComposerAttributeTable
-    QgsComposerFrame
-    # QgsComposerLabel
-    # QgsComposerLegend
-    # QgsComposerMap
-    # QgsComposerMapGrid
-    # QgsComposerPicture
-    # QgsComposerScaleBar
-    # QgsComposerShape
-    QgsComposerTable
-'''    
+    QgsLayoutItemArrow
+    QgsLayoutItemAttributeTable
+    # QgsLayoutItemLabel
+    # QgsLayoutItemLegend
+    # QgsLayoutItemMap
+    # QgsLayoutItemPicture
+    # QgsLayoutItemScaleBar
+    # QgsLayoutItemShape
+    QgsLayoutItemTable
+'''
 
-def setQgsComposerItemColor(composerItem, foregroundColor=None, backgroundColor=None):
+def setlayoutItemColor(item, foregroundColor=None, backgroundColor=None):
     if foregroundColor is None and backgroundColor is None:
         return
-    classname = type(composerItem).__name__
-    ##print(classname)
-    if isinstance(composerItem, QgsComposerLabel):
-        setQgsComposerLabelColor(composerItem, foregroundColor, backgroundColor)
-        sillyWidgetFix(composerItem)
-    if isinstance(composerItem, QgsComposerLegend):
-        setQgsComposerLegendColor(composerItem, foregroundColor, backgroundColor)
-        sillyWidgetFix(composerItem)
-    if isinstance(composerItem, QgsComposerMap):
-        setQgsComposerMapColor(composerItem, foregroundColor, backgroundColor)
-        #sillyWidgetFix(composerItem)
-    if isinstance(composerItem, QgsComposerPicture):
-        setQgsComposerPictureColor(composerItem, foregroundColor, backgroundColor)
-        sillyWidgetFix(composerItem)
-    if isinstance(composerItem, QgsComposerScaleBar):
-        setQgsComposerScaleBarColor(composerItem, foregroundColor, backgroundColor)
-        sillyWidgetFix(composerItem)
-    if isinstance(composerItem, QgsComposerShape):
-        setQgsComposerShapeColor(composerItem, foregroundColor, backgroundColor)
-        sillyWidgetFix(composerItem)
-    if isinstance(composerItem, QgsComposerFrame):
-        setQgsComposerAttributeTableColor(composerItem, foregroundColor, backgroundColor)
-        sillyWidgetFix(composerItem)
+    classname = type(item).__name__
+    print(classname)
+    if isinstance(item, QgsLayoutItemLabel):
+        setLabelColor(item, foregroundColor, backgroundColor)
+    if isinstance(item, QgsLayoutItemLegend):
+        setLegendColor(item, foregroundColor, backgroundColor)
+    if isinstance(item, QgsLayoutItemMap):
+        setMapColor(item, foregroundColor, backgroundColor)
+    if isinstance(item, QgsLayoutItemPicture):
+        setPictureColor(item, foregroundColor, backgroundColor)
+    if isinstance(item, QgsLayoutItemScaleBar):
+        setScaleBarColor(item, foregroundColor, backgroundColor)
+    if isinstance(item, QgsLayoutItemShape):
+        setShapeColor(item, foregroundColor, backgroundColor)
     '''
-    if isinstance(composerItem, QgsComposerArrow):
-        setQgsComposerAttributeTableColor(composerItem, foregroundColor, backgroundColor)
-        sillyWidgetFix(composerItem)
+    if isinstance(item, QgsLayoutItemFrame):
+        setAttributeTableColor(item, foregroundColor, backgroundColor)
     '''
-
-

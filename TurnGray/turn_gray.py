@@ -20,15 +20,16 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QDialogButtonBox, QIcon
-from qgis.core import QgsMessageLog
+from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction, QDialogButtonBox
+from qgis.core import QgsMessageLog, QgsProject
 # Initialize Qt resources from file resources.py
-import resources
+from .resources import *
 # Import the code for the dialog
-from turn_gray_dialog import TurnGrayDialog
+from .turn_gray_dialog import TurnGrayDialog
 import os.path
-from composer_item_color_setters import setQgsComposerItemColor
+from .composer_item_color_setters import setlayoutItemColor
 import qgis
 
 
@@ -87,7 +88,7 @@ class TurnGray:
 
     def log(self, message, tab='turn gray'):
         if self.do_log:
-            QgsMessageLog.logMessage(str(message), 'turn gray', QgsMessageLog.INFO )
+            QgsMessageLog.logMessage(str(message), 'turn gray', QgsMessageLog.INFO)
             #progress.setText('  '+str(message))
 
 
@@ -181,8 +182,8 @@ class TurnGray:
         self.dlg.comboBox_composer.currentIndexChanged.connect(self.updateInterface)
         self.dlg.checkBox_foreground.toggled.connect(self.updateInterface)
         self.dlg.checkBox_background.toggled.connect(self.updateInterface)
-        self.dlg.mColorButtonForeground.setAllowAlpha(True)
-        self.dlg.mColorButtonBackground.setAllowAlpha(True)
+        #self.dlg.mColorButtonForeground.setAllowAlpha(True)
+        #self.dlg.mColorButtonBackground.setAllowAlpha(True)
         self.updateInterface()
 
 
@@ -195,7 +196,7 @@ class TurnGray:
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
         del self.toolbar
-    
+
 
     def updateInterface(self):
         self.dlg.mColorButtonForeground.setEnabled(self.dlg.checkBox_foreground.isChecked())
@@ -209,58 +210,48 @@ class TurnGray:
     def run(self):
         """Run method that performs all the real work"""
         # add composer names to dialog
-        composers = self.iface.activeComposers()
+        layouts = QgsProject.instance().layoutManager().layouts()
         self.dlg.comboBox_composer.clear()
         self.dlg.comboBox_composer.addItem('')
-        for composer in composers:
-            self.dlg.comboBox_composer.addItem(composer.composerWindow().windowTitle())
+        for layout in layouts:
+            self.dlg.comboBox_composer.addItem(layout.name())
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            
-            composers = self.iface.activeComposers()
-            self.log(composers)
-            
-            #self.log(self.dlg.comboBox_composer)
-            #self.log(self.dlg.comboBox_composer.currentText())
-            
+            self.log(layouts)
+
             if self.dlg.comboBox_composer.currentText() == '':
                 self.log(u'no composer selected')
                 return
-            
-            cv = None
-            for composer in composers:
-                self.log(u'composer title"' + composer.composerWindow().windowTitle())
-                self.log(u'combobox item"' + self.dlg.comboBox_composer.currentText())
-                if composer.composerWindow().windowTitle() == self.dlg.comboBox_composer.currentText():
-                    cv = composer
+
+            lo = None
+            for layout in layouts:
+                self.log(u'layout name: {}"'.format(layout.name()))
+                self.log(u'combobox item: {}"'.format(self.dlg.comboBox_composer.currentText()))
+                if layout.name() == self.dlg.comboBox_composer.currentText():
+                    lo = layout
                     break
-            if cv is None:
-                self.log(u'composer "' + self.dlg.comboBox_composer.currentText() + '" does not exist')
+            if lo is None:
+                self.log(u'layout "{}" does not exist'.format(self.dlg.comboBox_composer.currentText()))
                 return
-                        
-            title = cv.composerWindow().windowTitle()
-            self.log(title)
-            
+
             if self.dlg.checkBox_foreground.isChecked():
                 newForegroundColor = self.dlg.mColorButtonForeground.color()
                 self.log(newForegroundColor.getRgb())
             else:
                 newForegroundColor = None
+
             if self.dlg.checkBox_background.isChecked():
                 newBackgroundColor = self.dlg.mColorButtonBackground.color()
                 self.log(newBackgroundColor.getRgb())
             else:
                 newBackgroundColor = None
 
-            for composerItem in cv.items():
-                setQgsComposerItemColor(composerItem, newForegroundColor, newBackgroundColor)
-             
-            # repaint
-            cv.composition().refreshItems()
-            
+            for item in lo.items():
+                setlayoutItemColor(item, newForegroundColor, newBackgroundColor)
+
+            # refresh
+            lo.refresh()

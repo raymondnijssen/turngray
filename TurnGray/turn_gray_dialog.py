@@ -23,13 +23,15 @@
 
 import os
 
-from PyQt4 import QtGui, uic
+from PyQt5 import QtGui, QtWidgets, uic
+#from PyQt5.QtCore import pyqtSignal
+
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'turn_gray_dialog_base.ui'))
 
 
-class TurnGrayDialog(QtGui.QDialog, FORM_CLASS):
+class TurnGrayDialog(QtWidgets.QDialog, FORM_CLASS):
     def __init__(self, parent=None):
         """Constructor."""
         super(TurnGrayDialog, self).__init__(parent)
