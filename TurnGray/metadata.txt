@@ -26,7 +26,7 @@ repository=https://github.com/raymondnijssen/turngray
 
 # Uncomment the following line and add your changelog:
 changelog:
-    3.0.0   (04-2019) upgrade for QGIS 3.4
+    3.0.0   (04-2019) upgrade for QGIS 3.0
     0.4.0   (08-2017) added new types: attribute tables, map grids, scale bar (fill) and pictures
     0.3.1   (03-2017) checkboxes for changing foreground and background colors
     0.3.0   (03-2017) forcing to choose composer, scalable layout in dialog
