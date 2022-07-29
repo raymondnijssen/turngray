@@ -10,65 +10,57 @@ from qgis.core import (
     #, QgsLayoutItemTable, QgsLayoutItemFrame
 
 
-# fixes not updated composer widget
-# https://lists.osgeo.org/pipermail/qgis-developer/2017-February/047241.html
-def sillyWidgetFix(item):
-    old_id = item.id()
-    item.setId('a')
-    item.setId(old_id)
+def set_label_color(item, foreground_color=None, background_color=None):
+    if foreground_color is not None:
+        item.setFontColor(foreground_color)
+        item.setFrameStrokeColor(foreground_color)
+    if background_color is not None:
+        item.setbackground_color(background_color)
 
 
-def setLabelColor(item, foregroundColor=None, backgroundColor=None):
-    if foregroundColor is not None:
-        item.setFontColor(foregroundColor)
-        item.setFrameStrokeColor(foregroundColor)
-    if backgroundColor is not None:
-        item.setBackgroundColor(backgroundColor)
+def set_legend_color(item, foreground_color=None, background_color=None):
+    if foreground_color is not None:
+        item.setFontColor(foreground_color)
+        item.setFrameStrokeColor(foreground_color)
+    if background_color is not None:
+        item.setbackground_color(background_color)
 
 
-def setLegendColor(item, foregroundColor=None, backgroundColor=None):
-    if foregroundColor is not None:
-        item.setFontColor(foregroundColor)
-        item.setFrameStrokeColor(foregroundColor)
-    if backgroundColor is not None:
-        item.setBackgroundColor(backgroundColor)
-
-
-def setMapColor(item, foregroundColor=None, backgroundColor=None):
-    if foregroundColor is not None:
-        item.setFrameStrokeColor(foregroundColor)
+def set_map_color(item, foreground_color=None, background_color=None):
+    if foreground_color is not None:
+        item.setFrameStrokeColor(foreground_color)
         for grid in item.grids().asList():
-            grid.setAnnotationFontColor(foregroundColor)
-            grid.setFramePenColor(foregroundColor)
-            grid.setFrameFillColor2(foregroundColor)
-            grid.setGridLineColor(foregroundColor)
-    if backgroundColor is not None:
-        item.setBackgroundColor(backgroundColor)
+            grid.setAnnotationFontColor(foreground_color)
+            grid.setFramePenColor(foreground_color)
+            grid.setFrameFillColor2(foreground_color)
+            grid.setGridLineColor(foreground_color)
+    if background_color is not None:
+        item.setbackground_color(background_color)
         for grid in item.grids().asList():
-            grid.setFrameFillColor1(backgroundColor)
+            grid.setFrameFillColor1(background_color)
 
 
-def setPictureColor(item, foregroundColor=None, backgroundColor=None):
-    if foregroundColor is not None:
-        item.setFrameStrokeColor(foregroundColor)
-        item.setSvgStrokeColor(foregroundColor)
-    if backgroundColor is not None:
-        item.setBackgroundColor(backgroundColor)
-        item.setSvgFillColor(backgroundColor)
+def set_picture_color(item, foreground_color=None, background_color=None):
+    if foreground_color is not None:
+        item.setFrameStrokeColor(foreground_color)
+        item.setSvgStrokeColor(foreground_color)
+    if background_color is not None:
+        item.setbackground_color(background_color)
+        item.setSvgFillColor(background_color)
 
 
-def setScaleBarColor(item, foregroundColor=None, backgroundColor=None):
-    if foregroundColor is not None:
-        item.setFontColor(foregroundColor)
-        item.setLineColor(foregroundColor)
-        item.setFillColor(foregroundColor)
-        item.setFrameStrokeColor(foregroundColor)
-    if backgroundColor is not None:
-        item.setBackgroundColor(backgroundColor)
-        item.setFillColor2(backgroundColor)
+def set_scale_bar_color(item, foreground_color=None, background_color=None):
+    if foreground_color is not None:
+        item.setFontColor(foreground_color)
+        item.setLineColor(foreground_color)
+        item.setFillColor(foreground_color)
+        item.setFrameStrokeColor(foreground_color)
+    if background_color is not None:
+        item.setbackground_color(background_color)
+        item.setFillColor2(background_color)
 
 
-def setShapeColor(item, foregroundColor=None, backgroundColor=None):
+def set_shape_color(item, foreground_color=None, background_color=None):
     # TODO: check if exists!
     try:
         symbol = item.symbol().symbolLayers()[0]
@@ -76,22 +68,22 @@ def setShapeColor(item, foregroundColor=None, backgroundColor=None):
         return
     if not isinstance(symbol, QgsSimpleFillSymbolLayer):
         return
-    if foregroundColor is not None:
-        symbol.setStrokeColor(foregroundColor)
-    if backgroundColor is not None:
-        symbol.setFillColor(backgroundColor)
+    if foreground_color is not None:
+        symbol.setStrokeColor(foreground_color)
+    if background_color is not None:
+        symbol.setFillColor(background_color)
 
 
 # todo: fix for qgis 3
-def setTableColor(item, foregroundColor=None, backgroundColor=None):
+def set_table_color(item, foreground_color=None, background_color=None):
     if not isinstance(item.multiFrame(), QgsComposerTableV2):
         return
-    if foregroundColor is not None:
-        item.multiFrame().setGridColor(foregroundColor)
-        item.multiFrame().setHeaderFontColor(foregroundColor)
-        item.multiFrame().setContentFontColor(foregroundColor)
-    if backgroundColor is not None:
-        item.multiFrame().setBackgroundColor(backgroundColor)
+    if foreground_color is not None:
+        item.multiFrame().setGridColor(foreground_color)
+        item.multiFrame().setHeaderFontColor(foreground_color)
+        item.multiFrame().setContentFontColor(foreground_color)
+    if background_color is not None:
+        item.multiFrame().setbackground_color(background_color)
 
 
 '''
@@ -107,24 +99,29 @@ todo:
     QgsLayoutItemTable
 '''
 
-def setlayoutItemColor(item, foregroundColor=None, backgroundColor=None):
-    if foregroundColor is None and backgroundColor is None:
+def set_layout_item_color(item, foreground_color=None, background_color=None):
+    if foreground_color is None and background_color is None:
         return
-    classname = type(item).__name__
-    print(classname)
+
+    class_name = type(item).__name__
+    #print(class_name)
+
     if isinstance(item, QgsLayoutItemLabel):
-        setLabelColor(item, foregroundColor, backgroundColor)
-    if isinstance(item, QgsLayoutItemLegend):
-        setLegendColor(item, foregroundColor, backgroundColor)
-    if isinstance(item, QgsLayoutItemMap):
-        setMapColor(item, foregroundColor, backgroundColor)
-    if isinstance(item, QgsLayoutItemPicture):
-        setPictureColor(item, foregroundColor, backgroundColor)
-    if isinstance(item, QgsLayoutItemScaleBar):
-        setScaleBarColor(item, foregroundColor, backgroundColor)
-    if isinstance(item, QgsLayoutItemShape):
-        setShapeColor(item, foregroundColor, backgroundColor)
+        set_label_color(item, foreground_color, background_color)
+    elif isinstance(item, QgsLayoutItemLegend):
+        set_legend_color(item, foreground_color, background_color)
+    elif isinstance(item, QgsLayoutItemMap):
+        set_map_color(item, foreground_color, background_color)
+    elif isinstance(item, QgsLayoutItemPicture):
+        set_picture_color(item, foreground_color, background_color)
+    elif isinstance(item, QgsLayoutItemScaleBar):
+        set_scale_bar_color(item, foreground_color, background_color)
+    elif isinstance(item, QgsLayoutItemShape):
+        set_shape_color(item, foreground_color, background_color)
+    else:
+        print(f'Could not change attributes of class: {class_name}')
+
     '''
     if isinstance(item, QgsLayoutItemFrame):
-        setAttributeTableColor(item, foregroundColor, backgroundColor)
+        setAttributeTableColor(item, foreground_color, background_color)
     '''

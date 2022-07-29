@@ -31,7 +31,7 @@ import qgis
 from qgis.core import QgsMessageLog, QgsProject
 
 from .turn_gray_dialog import TurnGrayDialog
-from .composer_item_color_setters import setlayoutItemColor
+from .composer_item_color_setters import set_layout_item_color
 
 
 
@@ -195,7 +195,7 @@ class TurnGray:
                 newBackgroundColor = None
 
             for item in lo.items():
-                setlayoutItemColor(item, newForegroundColor, newBackgroundColor)
+                set_layout_item_color(item, newForegroundColor, newBackgroundColor)
 
             # refresh
             lo.refresh()
