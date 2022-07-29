@@ -1,16 +1,13 @@
-# This file contains metadata for your plugin. Since
-# version 2.0 of QGIS this is the proper way to supply
-# information about a plugin. The old method of
-# embedding metadata in __init__.py will
-# is no longer supported since version 2.0.
+# This file should be included when you package your plugin.
 
-# This file should be included when you package your plugin.# Mandatory items:
+# Mandatory items:
 
 [general]
 name=Turn Gray
-qgisMinimumVersion=3.0
+qgisMinimumVersion=3.10
+qgisMaximumVersion=3.99
 description=Change layout items' black color into gray (or any other color).
-version=3.0.0
+version=3.1.0
 author=Raymond Nijssen, Terglobo
 email=r.nijssen@terglobo.nl
 
@@ -18,6 +15,7 @@ about=This plugin provides an easy way to change the color of all standard items
 
 # Feel free to let me know if you like or dislike this tool, and why. And if you have suggestions and they make sense to me, I might even implement them. Or implement them yourself if you can and do a pull request, the code is on github.
 
+homepage=https://github.com/raymondnijssen/turngray
 tracker=https://github.com/raymondnijssen/turngray/issues
 repository=https://github.com/raymondnijssen/turngray
 # End of mandatory metadata
@@ -26,7 +24,7 @@ repository=https://github.com/raymondnijssen/turngray
 
 # Uncomment the following line and add your changelog:
 changelog:
-    3.0.1   (07-2022) code clean up
+    3.1.0   (07-2022) set color button in layout window too (and major refactoring)
     3.0.0   (04-2019) upgrade for QGIS 3.0
     0.4.0   (08-2017) added new types: attribute tables, map grids, scale bar (fill) and pictures
     0.3.1   (03-2017) checkboxes for changing foreground and background colors
@@ -38,10 +36,8 @@ changelog:
 # Tags are comma separated with spaces allowed
 tags=map layout composer change item color colour black gray grey
 
-homepage=https://github.com/raymondnijssen/turngray/blob/master/README.md
 category=Plugins
 icon=img/icon.svg
-experimental=False
 
-# deprecated flag (applies to the whole plugin, not just a single version)
+experimental=False
 deprecated=False
