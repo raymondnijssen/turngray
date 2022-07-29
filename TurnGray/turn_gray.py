@@ -21,16 +21,19 @@
  ***************************************************************************/
 """
 import os.path
+from functools import partial
 
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction, QDialogButtonBox
+from PyQt5.QtWidgets import QAction
 
 import qgis
 from qgis.core import QgsMessageLog, QgsProject
 
 from .turn_gray_dialog import TurnGrayDialog
 from .composer_item_color_setters import setlayoutItemColor
+
+
 
 
 class TurnGray:
@@ -43,6 +46,8 @@ class TurnGray:
         self.name = 'TurnGray'
         self.actions = []
         self.do_log = False # set to True for debugging
+
+        self.testlo = 1
 
     def log(self, message, tab=None):
         if tab is None:
@@ -90,20 +95,16 @@ class TurnGray:
         icon_path = os.path.join(self.plugin_dir, 'img', 'icon.png')
         self.add_action(
             icon_path,
-            text='Change color of composer items',
+            text='Change color of all composer items',
             callback=self.run,
             parent=self.iface.mainWindow(),
             status_tip=self.name)
 
         self.dlg = TurnGrayDialog()
 
-        # connections:
-        self.dlg.comboBox_composer.currentIndexChanged.connect(self.updateInterface)
-        self.dlg.checkBox_foreground.toggled.connect(self.updateInterface)
-        self.dlg.checkBox_background.toggled.connect(self.updateInterface)
-        #self.dlg.mColorButtonForeground.setAllowAlpha(True)
-        #self.dlg.mColorButtonBackground.setAllowAlpha(True)
-        self.updateInterface()
+        # connections
+        self.iface.layoutDesignerOpened.connect(self.designer_opened)
+        self.iface.layoutDesignerClosed.connect(self.designer_closed)
 
 
     def unload(self):
@@ -117,22 +118,47 @@ class TurnGray:
         del self.toolbar
 
 
-    def updateInterface(self):
-        self.dlg.mColorButtonForeground.setEnabled(self.dlg.checkBox_foreground.isChecked())
-        self.dlg.mColorButtonBackground.setEnabled(self.dlg.checkBox_background.isChecked())
-        if self.dlg.comboBox_composer.currentIndex() > 0 and (self.dlg.checkBox_foreground.isChecked() or self.dlg.checkBox_background.isChecked()):
-            self.dlg.button_box.button(QDialogButtonBox.Ok).setEnabled(True)
-        else:
-            self.dlg.button_box.button(QDialogButtonBox.Ok).setEnabled(False)
+    def designer_opened(self, designer):
+        print('opened')
+
+        tb = designer.actionsToolbar()
+        icon = QIcon(os.path.join(self.plugin_dir, 'img', 'icon.png'))
+        action = QAction(icon, 'Change color of all composer items', parent=designer)
+        #action.triggered.connect(partial(self.dlg.show, designer))
+        action.triggered.connect(partial(self.run, designer))
+        tb.addAction(action)
+        print('opened finished')
 
 
-    def run(self):
+    def designer_closed(self):
+        pass
+        print('closed')
+
+
+    def run(self, designer):
+        print('---')
+        print(designer)
+        self.testlo = designer
+        if designer:
+            print(designer.layout())
+            print(designer.masterLayout())
+            print(designer.masterLayout().name())
+        print('---')
+
         # add composer names to dialog
         layouts = QgsProject.instance().layoutManager().layouts()
         self.dlg.comboBox_composer.clear()
         self.dlg.comboBox_composer.addItem('')
         for layout in layouts:
             self.dlg.comboBox_composer.addItem(layout.name())
+
+        if designer:
+            layout_index = self.dlg.comboBox_composer.findText(designer.masterLayout().name())
+            self.dlg.comboBox_composer.setCurrentIndex(layout_index)
+            self.dlg.comboBox_composer.setEnabled(False)
+        else:
+            self.dlg.comboBox_composer.setEnabled(True)
+
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
