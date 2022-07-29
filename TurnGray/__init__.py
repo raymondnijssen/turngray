@@ -22,14 +22,10 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
+from .turn_gray import TurnGray
 
-# noinspection PyPep8Naming
-def classFactory(iface):  # pylint: disable=invalid-name
-    """Load TurnGray class from file TurnGray.
 
-    :param iface: A QGIS interface instance.
-    :type iface: QgsInterface
-    """
-    #
-    from .turn_gray import TurnGray
+
+
+def classFactory(iface):
     return TurnGray(iface)

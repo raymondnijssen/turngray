@@ -1,8 +1,14 @@
 from PyQt5.QtGui import QColor
-from qgis.core import QgsLayoutItemLabel, QgsLayoutItemLegend, QgsLayoutItemMap, QgsLayoutItemPicture, QgsLayoutItemScaleBar, \
-    QgsLayoutItemShape, QgsSimpleFillSymbolLayer#, QgsLayoutItemTable, QgsLayoutItemFrame
+from qgis.core import (
+    QgsLayoutItemLabel,
+    QgsLayoutItemLegend,
+    QgsLayoutItemMap,
+    QgsLayoutItemPicture,
+    QgsLayoutItemScaleBar,
+    QgsLayoutItemShape,
+    QgsSimpleFillSymbolLayer)
+    #, QgsLayoutItemTable, QgsLayoutItemFrame
 
-#qgisVersion = qgis.utils.QGis.QGIS_VERSION_INT
 
 # fixes not updated composer widget
 # https://lists.osgeo.org/pipermail/qgis-developer/2017-February/047241.html
@@ -10,6 +16,7 @@ def sillyWidgetFix(item):
     old_id = item.id()
     item.setId('a')
     item.setId(old_id)
+
 
 def setLabelColor(item, foregroundColor=None, backgroundColor=None):
     if foregroundColor is not None:
@@ -74,6 +81,7 @@ def setShapeColor(item, foregroundColor=None, backgroundColor=None):
     if backgroundColor is not None:
         symbol.setFillColor(backgroundColor)
 
+
 # todo: fix for qgis 3
 def setTableColor(item, foregroundColor=None, backgroundColor=None):
     if not isinstance(item.multiFrame(), QgsComposerTableV2):
@@ -84,7 +92,6 @@ def setTableColor(item, foregroundColor=None, backgroundColor=None):
         item.multiFrame().setContentFontColor(foregroundColor)
     if backgroundColor is not None:
         item.multiFrame().setBackgroundColor(backgroundColor)
-
 
 
 '''
