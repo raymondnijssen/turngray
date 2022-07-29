@@ -40,7 +40,7 @@ tags=map layout composer change item color colour black gray grey
 
 homepage=https://github.com/raymondnijssen/turngray/blob/master/README.md
 category=Plugins
-icon=img/icon.png
+icon=img/icon.svg
 experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 23 24"
+   height="24"
+   width="23">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient4204">
+      <stop
+         id="stop4188"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+      <stop
+         id="stop4190"
+         offset="1"
+         style="stop-color:#7f7f7f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="matrix(2.6420144,0,0,1.2195165,-20.02564,-248.78542)"
+       gradientUnits="userSpaceOnUse"
+       y2="1056.7213"
+       x2="14.42799"
+       y1="1056.6932"
+       x1="9.3659258"
+       id="linearGradient4196"
+       xlink:href="#linearGradient4204" />
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-1028.3622)"
+     id="layer1">
+    <rect
+       ry="3.1901395"
+       y="1028.3622"
+       x="0"
+       height="24"
+       width="23"
+       id="rect4161"
+       style="opacity:1;fill:none;fill-opacity:0.24019608;stroke:none;stroke-width:3.70000005;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       ry="0"
+       y="1031.7819"
+       x="3.4196072"
+       height="17.160786"
+       width="16.160786"
+       id="rect4163-6"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:url(#linearGradient4196);stroke-width:2.83921432;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>

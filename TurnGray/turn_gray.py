@@ -92,7 +92,7 @@ class TurnGray:
         self.toolbar.setObjectName(self.name)
 
 
-        icon_path = os.path.join(self.plugin_dir, 'img', 'icon.png')
+        icon_path = os.path.join(self.plugin_dir, 'img', 'icon.svg')
         self.add_action(
             icon_path,
             text='Change color of all composer items',
@@ -108,12 +108,12 @@ class TurnGray:
 
 
     def unload(self):
-        """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu(
                 '&Turn Gray',
                 action)
             self.iface.removeToolBarIcon(action)
+
         # remove the toolbar
         del self.toolbar
 
@@ -122,7 +122,7 @@ class TurnGray:
         print('opened')
 
         tb = designer.actionsToolbar()
-        icon = QIcon(os.path.join(self.plugin_dir, 'img', 'icon.png'))
+        icon = QIcon(os.path.join(self.plugin_dir, 'img', 'icon.svg'))
         action = QAction(icon, 'Change color of all composer items', parent=designer)
         #action.triggered.connect(partial(self.dlg.show, designer))
         action.triggered.connect(partial(self.run, designer))
