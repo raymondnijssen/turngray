@@ -34,7 +34,7 @@ changelog:
     0.1.0   (02-2017) initial version
 
 # Tags are comma separated with spaces allowed
-tags=map layout composer change item color colour black gray grey
+tags=map,layout,composer,change,item,color,colour,black,gray,grey
 
 category=Plugins
 icon=img/icon.svg
