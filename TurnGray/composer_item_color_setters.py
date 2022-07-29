@@ -15,7 +15,7 @@ def set_label_color(item, foreground_color=None, background_color=None):
         item.setFontColor(foreground_color)
         item.setFrameStrokeColor(foreground_color)
     if background_color is not None:
-        item.setbackground_color(background_color)
+        item.setBackgroundColor(background_color)
 
 
 def set_legend_color(item, foreground_color=None, background_color=None):
@@ -23,7 +23,7 @@ def set_legend_color(item, foreground_color=None, background_color=None):
         item.setFontColor(foreground_color)
         item.setFrameStrokeColor(foreground_color)
     if background_color is not None:
-        item.setbackground_color(background_color)
+        item.setBackgroundColor(background_color)
 
 
 def set_map_color(item, foreground_color=None, background_color=None):
@@ -35,7 +35,7 @@ def set_map_color(item, foreground_color=None, background_color=None):
             grid.setFrameFillColor2(foreground_color)
             grid.setGridLineColor(foreground_color)
     if background_color is not None:
-        item.setbackground_color(background_color)
+        item.setBackgroundColor(background_color)
         for grid in item.grids().asList():
             grid.setFrameFillColor1(background_color)
 
@@ -45,7 +45,7 @@ def set_picture_color(item, foreground_color=None, background_color=None):
         item.setFrameStrokeColor(foreground_color)
         item.setSvgStrokeColor(foreground_color)
     if background_color is not None:
-        item.setbackground_color(background_color)
+        item.setBackgroundColor(background_color)
         item.setSvgFillColor(background_color)
 
 
@@ -56,7 +56,7 @@ def set_scale_bar_color(item, foreground_color=None, background_color=None):
         item.setFillColor(foreground_color)
         item.setFrameStrokeColor(foreground_color)
     if background_color is not None:
-        item.setbackground_color(background_color)
+        item.setBackgroundColor(background_color)
         item.setFillColor2(background_color)
 
 
@@ -83,7 +83,7 @@ def set_table_color(item, foreground_color=None, background_color=None):
         item.multiFrame().setHeaderFontColor(foreground_color)
         item.multiFrame().setContentFontColor(foreground_color)
     if background_color is not None:
-        item.multiFrame().setbackground_color(background_color)
+        item.multiFrame().setBackgroundColor(background_color)
 
 
 '''
