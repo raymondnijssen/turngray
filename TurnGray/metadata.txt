@@ -4,7 +4,7 @@
 
 [general]
 name=Turn Gray
-qgisMinimumVersion=3.10
+qgisMinimumVersion=3.0
 qgisMaximumVersion=3.99
 description=Change layout items' black color into gray (or any other color).
 version=3.1.0
