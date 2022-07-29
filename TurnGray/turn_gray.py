@@ -108,6 +108,11 @@ class TurnGray:
 
 
     def unload(self):
+        # disconnections
+        self.iface.layoutDesignerOpened.disconnect(self.designer_opened)
+        self.iface.layoutDesignerClosed.disconnect(self.designer_closed)
+
+        # remove actions
         for action in self.actions:
             self.iface.removePluginMenu(
                 '&Turn Gray',
