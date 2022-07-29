@@ -183,19 +183,19 @@ class TurnGray:
                 return
 
             if self.dlg.checkBox_foreground.isChecked():
-                newForegroundColor = self.dlg.mColorButtonForeground.color()
-                self.log(newForegroundColor.getRgb())
+                new_foreground_color = self.dlg.mColorButtonForeground.color()
+                self.log(new_foreground_color.getRgb())
             else:
-                newForegroundColor = None
+                new_foreground_color = None
 
             if self.dlg.checkBox_background.isChecked():
-                newBackgroundColor = self.dlg.mColorButtonBackground.color()
-                self.log(newBackgroundColor.getRgb())
+                new_background_color = self.dlg.mColorButtonBackground.color()
+                self.log(new_background_color.getRgb())
             else:
-                newBackgroundColor = None
+                new_background_color = None
 
             for item in lo.items():
-                set_layout_item_color(item, newForegroundColor, newBackgroundColor)
+                set_layout_item_color(item, new_foreground_color, new_background_color)
 
             # refresh
             lo.refresh()
