@@ -31,6 +31,7 @@ import qgis
 from qgis.core import QgsMessageLog, QgsProject
 
 from .turn_gray_dialog import TurnGrayDialog
+from .margin_guides_dialog import MarginGuidesDialog
 from .composer_item_color_setters import set_layout_item_color
 
 
@@ -101,6 +102,7 @@ class TurnGray:
             status_tip=self.name)
 
         self.dlg = TurnGrayDialog()
+        self.margin_guides_dlg = MarginGuidesDialog()
 
         # connections
         self.iface.layoutDesignerOpened.connect(self.designer_opened)
@@ -127,11 +129,18 @@ class TurnGray:
         print('opened')
 
         tb = designer.actionsToolbar()
+
         icon = QIcon(os.path.join(self.plugin_dir, 'img', 'icon.svg'))
         action = QAction(icon, 'Change color of all composer items', parent=designer)
         #action.triggered.connect(partial(self.dlg.show, designer))
         action.triggered.connect(partial(self.run, designer))
         tb.addAction(action)
+
+        margin_icon = QIcon(os.path.join(self.plugin_dir, 'img', 'icon_margin_guides.svg'))
+        margin_action = QAction(margin_icon, 'Set margin guides', parent=designer)
+        margin_action.triggered.connect(partial(self.run_margin_guides, designer))
+        tb.addAction(margin_action)
+
         print('opened finished')
 
 
@@ -204,3 +213,11 @@ class TurnGray:
 
             # refresh
             lo.refresh()
+
+
+    def run_margin_guides(self, designer):
+        self.margin_guides_dlg.show()
+        result = self.margin_guides_dlg.exec_()
+        if result:
+            print('yes')
+            self.margin_guides_dlg.add_margin_guides(designer)
