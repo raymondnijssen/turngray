@@ -111,6 +111,7 @@ todo:
     # QgsLayoutItemLabel
     # QgsLayoutItemLegend
     # QgsLayoutItemMap
+    # QgsLayoutItem3DMap
     # QgsLayoutItemPicture
     # QgsLayoutItemScaleBar
     # QgsLayoutItemShape

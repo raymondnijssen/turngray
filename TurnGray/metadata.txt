@@ -7,11 +7,11 @@ name=Turn Gray
 qgisMinimumVersion=3.0
 qgisMaximumVersion=3.99
 description=Change layout items' black color into gray (or any other color).
-version=3.1.0
+version=3.1.1
 author=Raymond Nijssen, Terglobo
 email=r.nijssen@terglobo.nl
 
-about=This plugin provides an easy way to change the color of all standard items in the layout at once. My use case was to change the black color of many items like labels, scale bars and frames into a dark gray color. But of course you can select any color you wish.
+about=This plugin provides an easy way to change the color of all items in the layout at once. My use case was to change the black color of many items like labels, scale bars and frames into a dark gray color. But of course you can select any color you wish.
 
 # Feel free to let me know if you like or dislike this tool, and why. And if you have suggestions and they make sense to me, I might even implement them. Or implement them yourself if you can and do a pull request, the code is on github.
 
@@ -24,6 +24,7 @@ repository=https://github.com/raymondnijssen/turngray
 
 # Uncomment the following line and add your changelog:
 changelog:
+    3.1.1   (10-2022) support for table and 3dmap items
     3.1.0   (07-2022) set color button in layout window too (and major refactoring)
     3.0.0   (04-2019) upgrade for QGIS 3.0
     0.4.0   (08-2017) added new types: attribute tables, map grids, scale bar (fill) and pictures
