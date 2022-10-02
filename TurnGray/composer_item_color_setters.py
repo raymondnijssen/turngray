@@ -6,8 +6,9 @@ from qgis.core import (
     QgsLayoutItemPicture,
     QgsLayoutItemScaleBar,
     QgsLayoutItemShape,
-    QgsSimpleFillSymbolLayer)
-    #, QgsLayoutItemTable, QgsLayoutItemFrame
+    QgsSimpleFillSymbolLayer,
+    QgsLayoutFrame,
+    QgsLayoutTable)
 
 
 def set_label_color(item, foreground_color=None, background_color=None):
@@ -75,28 +76,30 @@ def set_shape_color(item, foreground_color=None, background_color=None):
 
 
 # todo: fix for qgis 3
-def set_table_color(item, foreground_color=None, background_color=None):
-    if not isinstance(item.multiFrame(), QgsComposerTableV2):
+def set_frame_color(item, foreground_color=None, background_color=None):
+    mf = item.multiFrame()
+    if not isinstance(mf, QgsLayoutTable):
         return
     if foreground_color is not None:
-        item.multiFrame().setGridColor(foreground_color)
-        item.multiFrame().setHeaderFontColor(foreground_color)
-        item.multiFrame().setContentFontColor(foreground_color)
+        item.setFrameStrokeColor(foreground_color)
+        mf.setGridColor(foreground_color)
+        mf.setHeaderFontColor(foreground_color)
+        mf.setContentFontColor(foreground_color)
     if background_color is not None:
-        item.multiFrame().setBackgroundColor(background_color)
+        item.setBackgroundColor(background_color)
+        mf.setBackgroundColor(background_color)
 
 
 '''
 todo:
     QgsLayoutItemArrow
-    QgsLayoutItemAttributeTable
     # QgsLayoutItemLabel
     # QgsLayoutItemLegend
     # QgsLayoutItemMap
     # QgsLayoutItemPicture
     # QgsLayoutItemScaleBar
     # QgsLayoutItemShape
-    QgsLayoutItemTable
+    # QgsLayoutItemTable
 '''
 
 def set_layout_item_color(item, foreground_color=None, background_color=None):
@@ -118,10 +121,7 @@ def set_layout_item_color(item, foreground_color=None, background_color=None):
         set_scale_bar_color(item, foreground_color, background_color)
     elif isinstance(item, QgsLayoutItemShape):
         set_shape_color(item, foreground_color, background_color)
+    elif isinstance(item, QgsLayoutFrame):
+        set_frame_color(item, foreground_color, background_color)
     else:
         print(f'Could not change attributes of class: {class_name}')
-
-    '''
-    if isinstance(item, QgsLayoutItemFrame):
-        setAttributeTableColor(item, foreground_color, background_color)
-    '''

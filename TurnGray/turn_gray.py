@@ -150,14 +150,15 @@ class TurnGray:
 
 
     def run(self, designer):
-        print('---')
-        print(designer)
+        print('--- run turn_gray---')
+        #print(designer)
         self.testlo = designer
         if designer:
-            print(designer.layout())
-            print(designer.masterLayout())
-            print(designer.masterLayout().name())
-        print('---')
+            pass
+            ##rint(designer.layout())
+            #print(designer.masterLayout())
+            #print(designer.masterLayout().name())
+        #print('---')
 
         # add composer names to dialog
         layouts = QgsProject.instance().layoutManager().layouts()
@@ -219,5 +220,5 @@ class TurnGray:
         self.margin_guides_dlg.show()
         result = self.margin_guides_dlg.exec_()
         if result:
-            print('yes')
+            print('--- run margin_guides ---')
             self.margin_guides_dlg.add_margin_guides(designer)
