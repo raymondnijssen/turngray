@@ -8,7 +8,15 @@ from qgis.core import (
     QgsLayoutItemShape,
     QgsSimpleFillSymbolLayer,
     QgsLayoutFrame,
-    QgsLayoutTable)
+    QgsLayoutTable
+)
+
+# QGIS can be compiled without 3D, so check availability before loading.
+try:
+    from qgis._3d import QgsLayoutItem3DMap
+    has_3d = True
+except ModuleNotFoundError:
+    has_3d = False
 
 
 def set_label_color(item, foreground_color=None, background_color=None):
@@ -39,6 +47,13 @@ def set_map_color(item, foreground_color=None, background_color=None):
         item.setBackgroundColor(background_color)
         for grid in item.grids().asList():
             grid.setFrameFillColor1(background_color)
+
+
+def set_3dmap_color(item, foreground_color=None, background_color=None):
+    if foreground_color is not None:
+        item.setFrameStrokeColor(foreground_color)
+    if background_color is not None:
+        item.setBackgroundColor(background_color)
 
 
 def set_picture_color(item, foreground_color=None, background_color=None):
@@ -115,6 +130,8 @@ def set_layout_item_color(item, foreground_color=None, background_color=None):
         set_legend_color(item, foreground_color, background_color)
     elif isinstance(item, QgsLayoutItemMap):
         set_map_color(item, foreground_color, background_color)
+    elif has_3d and isinstance(item, QgsLayoutItem3DMap):
+        set_3dmap_color(item, foreground_color, background_color)
     elif isinstance(item, QgsLayoutItemPicture):
         set_picture_color(item, foreground_color, background_color)
     elif isinstance(item, QgsLayoutItemScaleBar):
